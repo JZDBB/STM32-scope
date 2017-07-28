@@ -29,7 +29,25 @@ Rebuild target 'ADC'
 compiling main.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
-main.c: 1 warning, 0 errors
+background.h(16): warning:  #1295-D: Deprecated declaration set_background - give arg types
+  void set_background();
+background.h(18): warning:  #1-D: last line of file ends without a newline
+  #endif
+main.c(12): warning:  #177-D: variable "adcx" was declared but never referenced
+        u16 adcx;
+main.c(13): warning:  #177-D: variable "temp" was declared but never referenced
+        float temp;
+main.c(14): warning:  #550-D: variable "vpp_buf" was set but never used
+        u8 vpp_buf[7];
+main.c(15): warning:  #550-D: variable "v_buf" was set but never used
+        u8 v_buf[7];
+main.c(16): warning:  #550-D: variable "duty_buf" was set but never used
+        u8 duty_buf[8];
+main.c(17): warning:  #177-D: variable "vol" was declared but never referenced
+        u16 vol;
+main.c(18): warning:  #177-D: variable "duty" was declared but never referenced
+        u16 duty = 0;
+main.c: 10 warnings, 0 errors
 compiling stm32f4xx_it.c...
 stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -38,6 +56,14 @@ compiling system_stm32f4xx.c...
 stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
 system_stm32f4xx.c: 1 warning, 0 errors
+compiling background.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+background.h(16): warning:  #1295-D: Deprecated declaration set_background - give arg types
+  void set_background();
+background.h(18): warning:  #1-D: last line of file ends without a newline
+  #endif
+background.c: 3 warnings, 0 errors
 compiling led.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -49,11 +75,9 @@ compiling lcd.c...
 compiling adc.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
-..\HARDWARE\ADC\adc.c: 1 warning, 0 errors
-compiling dma.c...
-..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
-    #define STM32F40_41xxx
-..\HARDWARE\DMA\dma.c: 1 warning, 0 errors
+..\HARDWARE\ADC\adc.c(76): warning:  #1-D: last line of file ends without a newline
+  } 
+..\HARDWARE\ADC\adc.c: 2 warnings, 0 errors
 compiling key.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -100,15 +124,9 @@ compiling stm32f4xx_syscfg.c...
     #define STM32F40_41xxx
 ..\FWLIB\src\stm32f4xx_syscfg.c: 1 warning, 0 errors
 linking...
-..\OBJ\ADC.axf: Error: L6218E: Undefined symbol DMA_Cmd (referred from dma.o).
-..\OBJ\ADC.axf: Error: L6218E: Undefined symbol DMA_DeInit (referred from dma.o).
-..\OBJ\ADC.axf: Error: L6218E: Undefined symbol DMA_GetCmdStatus (referred from dma.o).
-..\OBJ\ADC.axf: Error: L6218E: Undefined symbol DMA_Init (referred from dma.o).
-..\OBJ\ADC.axf: Error: L6218E: Undefined symbol DMA_SetCurrDataCounter (referred from dma.o).
-Not enough information to list image symbols.
-Finished: 1 information, 0 warning and 5 error messages.
-"..\OBJ\ADC.axf" - 5 Error(s), 18 Warning(s).
-Target not created.
+Program Size: Code=27646 RO-data=6574 RW-data=588 ZI-data=1852  
+FromELF: creating hex file...
+"..\OBJ\ADC.axf" - 0 Error(s), 30 Warning(s).
 </pre>
 </body>
 </html>

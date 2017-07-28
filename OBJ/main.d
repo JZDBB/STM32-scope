@@ -42,3 +42,4 @@
 ..\obj\main.o: ..\HARDWARE\LCD\lcd.h
 ..\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\main.o: ..\HARDWARE\ADC\adc.h
+..\obj\main.o: background.h

@@ -2559,7 +2559,7 @@ void LCD_Init(void)
 		LCD_WriteReg(0X07,0X0033);   
 		LCD_WriteReg(0X07,0X0133);   
 	}		 
-	LCD_Display_Dir(1);		 	//默认为竖屏
+	LCD_Display_Dir(0);		 	//默认为竖屏
 	LCD_LED=1;					//点亮背光
 	LCD_Clear(WHITE);
 }  
@@ -2642,9 +2642,9 @@ void LCD_DrawLine(u16 x1, u16 y1, u16 x2, u16 y2, u16 color)
 {
 	u16 t; 
 	u16 POINT_COLOR;
-	POINT_COLOR = color;
 	int xerr=0,yerr=0,delta_x,delta_y,distance; 
 	int incx,incy,uRow,uCol; 
+	POINT_COLOR = color;
 	delta_x=x2-x1; //计算坐标增量 
 	delta_y=y2-y1; 
 	uRow=x1; 
@@ -2659,7 +2659,7 @@ void LCD_DrawLine(u16 x1, u16 y1, u16 x2, u16 y2, u16 color)
 	else distance=delta_y; 
 	for(t=0;t<=distance+1;t++ )//画线输出 
 	{  
-		LCD_DrawPoint(uRow,uCol);//画点 
+		LCD_Fast_DrawPoint(uRow,uCol,POINT_COLOR);//画点 
 		xerr+=delta_x ; 
 		yerr+=delta_y ; 
 		if(xerr>distance) 
@@ -2767,10 +2767,14 @@ u32 LCD_Pow(u8 m,u8 n)
 //size:字体大小
 //color:颜色 
 //num:数值(0~4294967295);	 
-void LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size)
+void LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size,u16 back_color,u16 color)
 {         	
 	u8 t,temp;
-	u8 enshow=0;						   
+	u8 enshow=0;
+	u16 BACK_COLOR;
+	u16 POINT_COLOR;
+	POINT_COLOR = color;
+	BACK_COLOR = back_color;	
 	for(t=0;t<len;t++)
 	{
 		temp=(num/LCD_Pow(10,len-t-1))%10;
@@ -2778,12 +2782,12 @@ void LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size)
 		{
 			if(temp==0)
 			{
-				LCD_ShowChar(x+(size/2)*t,y,' ',size,0);
+				LCD_ShowChar(x+(size/2)*t,y,' ',size,0,BACK_COLOR,POINT_COLOR);
 				continue;
 			}else enshow=1; 
 		 	 
 		}
-	 	LCD_ShowChar(x+(size/2)*t,y,temp+'0',size,0); 
+	 	LCD_ShowChar(x+(size/2)*t,y,temp+'0',size,0,BACK_COLOR,POINT_COLOR); 
 	}
 } 
 //显示数字,高位为0,还是显示
@@ -2795,10 +2799,15 @@ void LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size)
 //[7]:0,不填充;1,填充0.
 //[6:1]:保留
 //[0]:0,非叠加显示;1,叠加显示.
-void LCD_ShowxNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode)
+void LCD_ShowxNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode, u16 back_color, u16 color)
 {  
 	u8 t,temp;
-	u8 enshow=0;						   
+	u8 enshow=0;
+	u16 BACK_COLOR;
+	u16 POINT_COLOR;
+	POINT_COLOR = color;
+	BACK_COLOR = back_color;
+							   
 	for(t=0;t<len;t++)
 	{
 		temp=(num/LCD_Pow(10,len-t-1))%10;
@@ -2806,13 +2815,13 @@ void LCD_ShowxNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode)
 		{
 			if(temp==0)
 			{
-				if(mode&0X80)LCD_ShowChar(x+(size/2)*t,y,'0',size,mode&0X01);  
-				else LCD_ShowChar(x+(size/2)*t,y,' ',size,mode&0X01);  
+				if(mode&0X80)LCD_ShowChar(x+(size/2)*t,y,'0',size,mode&0X01,BACK_COLOR,POINT_COLOR);  
+				else LCD_ShowChar(x+(size/2)*t,y,' ',size,mode&0X01,BACK_COLOR,POINT_COLOR);  
  				continue;
 			}else enshow=1; 
 		 	 
 		}
-	 	LCD_ShowChar(x+(size/2)*t,y,temp+'0',size,mode&0X01); 
+	 	LCD_ShowChar(x+(size/2)*t,y,temp+'0',size,mode&0X01,BACK_COLOR,POINT_COLOR); 
 	}
 } 
 //显示字符串

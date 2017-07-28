@@ -146,8 +146,8 @@ void LCD_DrawRectangle(u16 x1, u16 y1, u16 x2, u16 y2, u16 color);		   				//»­¾
 void LCD_Fill(u16 sx,u16 sy,u16 ex,u16 ey,u16 color);		   				//Ìî³äµ¥É«
 void LCD_Color_Fill(u16 sx,u16 sy,u16 ex,u16 ey,u16 *color);				//Ìî³äÖ¸¶¨ÑÕÉ«
 void LCD_ShowChar(u16 x,u16 y,u8 num,u8 size,u8 mode, u16 back_color, u16 color);						//ÏÔÊ¾Ò»¸ö×Ö·û
-void LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size);  						//ÏÔÊ¾Ò»¸öÊý×Ö
-void LCD_ShowxNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode);				//ÏÔÊ¾ Êý×Ö
+void LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size,u16 back_color,u16 color);  						//ÏÔÊ¾Ò»¸öÊý×Ö
+void LCD_ShowxNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode, u16 back_color, u16 color);				//ÏÔÊ¾ Êý×Ö
 void LCD_ShowString(u16 x,u16 y,u16 width,u16 height,u8 size,u8 *p, u16 back_color, u16 color);		//ÏÔÊ¾Ò»¸ö×Ö·û´®,12/16×ÖÌå
 
 void LCD_WriteReg(u16 LCD_Reg, u16 LCD_RegValue);

@@ -50,9 +50,11 @@ int main(void)
 	
 	set_background();
 	Get_Value();
+	vpp = ADC_Get_Vpp();
 	
 	while(1)
 	{ 
+		i = 0;
 		if(pause == 0)
 		{
 			for(j=index2;j<index2+250;j++)
@@ -75,48 +77,52 @@ int main(void)
 				{
 					temp1=0;	
 				}
-				draw_point(j-index2,arr_plot[i+1],BLACK);
+				draw_point(j-index2,arr_plot[j-index2],BLACK);
+				draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);
 				draw_point(j-index2,temp,YELLOW);				
 				draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
 				Grid();
-				arr_plot[i] = temp;
-				i++;
+				arr_plot[j-index2] = temp;
 				vol = ADC_BUFF[j] * 3300 *multiple/ 4095;
 				LCD_ShowxNum(46,203,vol,6,16,0,BLACK,RED);
-				delay_ms(50);
 				//LCD_ShowxNum(262,102,arr_freq,RED,BLACK);
 			}
 			Get_Value();
+			vpp = ADC_Get_Vpp();
 		}
 		else
 		{
-			clear();
-			for(j=index2+hor;j<index2+hor+250;j++)
+			if(update)
 			{
-				temp = ADC_BUFF[j] * 3300 * multiple / 4096  *  25 /vcc_div + ver;
-				temp1 = ADC_BUFF[j + 1] * 3300* multiple / 4096 * 25 / vcc_div + ver;
-				if(temp>200)
+				clear();
+				for(j=index2+hor;j<index2+hor+250;j++)
 				{
-					temp=200;
+					temp = ADC_BUFF[j] * 3300 * multiple / 4096  *  25 /vcc_div + ver;
+					temp1 = ADC_BUFF[j + 1] * 3300* multiple / 4096 * 25 / vcc_div + ver;
+					if(temp>200)
+					{
+						temp=200;
+					}
+					if(temp<0)
+					{
+						temp=0;	
+					}
+					if(temp1>200)
+					{
+						temp1=200;	
+					}
+					if(temp1<0)
+					{
+						temp1=0;	
+					}
+					draw_point(j-index2-hor,temp,YELLOW);				
+					draw_line(j-index2-hor,temp,j-index2-hor+1,temp1,YELLOW);
+					arr_plot[j-index2-hor] = temp;
 				}
-				if(temp<0)
-				{
-					temp=0;	
-				}
-				if(temp1>200)
-				{
-					temp1=200;	
-				}
-				if(temp1<0)
-				{
-					temp1=0;	
-				}
-				draw_point(j-index2,temp,YELLOW);				
-				draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
-				arr_plot[i] = temp;
-				i++;
+				Grid();
+				delay_ms(100);
+				update = 0;
 			}
-			Grid();
 		}
 	}
 }

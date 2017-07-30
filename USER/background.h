@@ -22,6 +22,7 @@ extern u8 pause;
 extern int selected;
 extern u8 magnitude_flag;
 extern long int scan_flag;
+extern int update;
 
 extern u8 arr_F[13][8];
 extern u8 arr_V[7][8];

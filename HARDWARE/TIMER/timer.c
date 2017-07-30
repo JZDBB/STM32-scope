@@ -115,7 +115,7 @@ void TIM2_Int_Init(u16 arr,u16 psc)
 	TIM_ITConfig(TIM2,TIM_IT_Update,ENABLE); //允许定时器2更新中断
 	TIM_Cmd(TIM2,ENABLE); //使能定时器2
 	
-	NVIC_InitStructure.NVIC_IRQChannel=TIM3_IRQn; //定时器2中断
+	NVIC_InitStructure.NVIC_IRQChannel=TIM2_IRQn; //定时器2中断
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0x01; //抢占优先级1
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0x03; //子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;
@@ -127,30 +127,33 @@ void TIM2_Int_Init(u16 arr,u16 psc)
 void TIM2_IRQHandler(void)
 {
 	if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET) //溢出中断
-		
-	
-	tp_dev.scan(0);
+	{
+		tp_dev.scan(0);
 		if(tp_dev.sta&TP_PRES_DOWN)
 		{
 			if(tp_dev.x[0]>=255&&tp_dev.x[0]<=316)
 			{
 				if(tp_dev.y[0]>=2&&tp_dev.y[0]<=38)
 				{
+					pause = 0;
 					choose(BLUE);
 					selected = 0;
 					choose(WHITE);
 				}
 				else if(tp_dev.y[0]>=42&&tp_dev.y[0]<=78)
 				{
+					pause = 0;
 					choose(BLUE);
 					selected = 1;
 					choose(WHITE);
 				}
 				else if(tp_dev.y[0]>=82&&tp_dev.y[0]<=101)
 				{
+					pause = 1;
 					choose(BLUE);
 					selected = 2;
 					choose(WHITE);
+					
 					if(flag_move ==0)
 					{
 						flag_move = 1;
@@ -163,18 +166,22 @@ void TIM2_IRQHandler(void)
 				}
 				else if(tp_dev.y[0]>=105&&tp_dev.y[0]<=124)
 				{
+					pause = 0;
 					choose(BLUE);
 					selected = 3;
 					choose(WHITE);
-					load_data();
+					
+					//load_data();
 				}
 				else if(tp_dev.y[0]>=128&&tp_dev.y[0]<=147)
 				{
 					if(tp_dev.x[0]>=255&&tp_dev.x[0]<=283)
 					{
+						pause = 0;
 						choose(BLUE);
 						selected = 4;
 						choose(WHITE);
+						
 						if(C_dc_ac == 0)
 						{
 							C_dc_ac = 1;
@@ -187,6 +194,7 @@ void TIM2_IRQHandler(void)
 					}
 					else if(tp_dev.x[0]>=288&&tp_dev.x[0]<=316)
 					{
+						pause = 0;
 						choose(BLUE);
 						selected = 5;
 						choose(WHITE);
@@ -203,17 +211,18 @@ void TIM2_IRQHandler(void)
 				}
 				else if(tp_dev.y[0]>=151&&tp_dev.y[0]<=170)
 				{
+					pause = 0;
 					choose(BLUE);
 					selected = 6;
 					choose(WHITE);
 				}
-				return;
 			}
 			if(tp_dev.y[0]>=174&&tp_dev.y[0]<=195)
 			{
 				if(tp_dev.x[0]>=257&&tp_dev.x[0]<=281)
 				{
-					switch(selected){
+					switch(selected)
+					{
 						case 0:
 							scan_flag++;
 							if(scan_flag==14)
@@ -233,11 +242,13 @@ void TIM2_IRQHandler(void)
 						case 2:
 							if(flag_move ==0)
 							{
-								ver = ver + 5;
+								update = 1;
+								hor = hor + 5;
 							}
 							else
 							{
-								hor = hor + 5;
+								update = 1;
+								ver = ver + 5;
 							}
 							break;
 						case 6:
@@ -274,11 +285,13 @@ void TIM2_IRQHandler(void)
 						case 2:
 							if(flag_move ==0)
 							{
-								ver = ver - 5;
+								update = 1;
+								hor = hor - 5;
 							}
 							else
 							{
-								hor = hor - 5;
+								update = 1;
+								ver = ver - 5;
 							}
 							break;
 						case 6:
@@ -295,5 +308,6 @@ void TIM2_IRQHandler(void)
 				}
 			}
 		}
+	}
 	TIM_ClearITPendingBit(TIM2,TIM_IT_Update);  //清除中断标志位
 }

@@ -4,7 +4,7 @@
 #define BUFFE (640)
 
 u16 ADC_BUFF[BUFFE];
-u16 index2 = 0;
+u16 index2 = 160;
 u16 index1 = 0;
 u8 flag_change = 0;
 u8 flag_50us = 0;
@@ -98,7 +98,7 @@ u16 ADC_Get_Vpp(void)
 	float pp=0;
 	max_data=ADC_BUFF[0];
 	min_data=ADC_BUFF[0];
-	for(n = 1;n<320;n++)
+	for(n = 30;n<320;n++)
 	{
 		if(ADC_BUFF[n]>max_data)
 		{
@@ -107,7 +107,6 @@ u16 ADC_Get_Vpp(void)
 		if(ADC_BUFF[n]<min_data)
 		{
 			min_data = ADC_BUFF[n];
-			index2 = n;
 		}			
 	} 	
 	pp = (float)(max_data-min_data);

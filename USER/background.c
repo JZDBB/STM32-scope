@@ -11,11 +11,12 @@ u8 num_shao_miao = 5;
 u8 mode1 = 0;
 u8 mode2 = 0;
 float gao_pin_palus = 0;
-u16 vpp;
 int flag = 0;
 int inter = 0;
 
 
+
+u16 vpp;
 int flag_move = 0;
 int gain = 1;
 u8 C_dc_ac = 0;
@@ -28,6 +29,7 @@ u16 vcc_div = 1000;
 int selected = 0;
 u8 magnitude_flag =3;
 long int scan_flag = 5;
+int update = 0;
 
 
 

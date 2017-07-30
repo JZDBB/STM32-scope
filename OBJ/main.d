@@ -45,3 +45,6 @@
 ..\obj\main.o: ..\HARDWARE\DMA\dma.h
 ..\obj\main.o: background.h
 ..\obj\main.o: ..\HARDWARE\TIMER\timer.h
+..\obj\main.o: ..\HARDWARE\include\touch.h
+..\obj\main.o: ..\HARDWARE\include\ott2001a.h
+..\obj\main.o: ..\HARDWARE\include\gt9147.h

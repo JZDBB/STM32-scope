@@ -6,10 +6,34 @@
 #include "lcd.h"
 #include "adc.h"
 
+u8 frequency_flag = 0;
+long int shao_miao_shu_du = 0;
+u8 num_shao_miao = 5;
+u8 mode1 = 0;
+u8 mode2 = 0;
+u8 num_fu_du =3;
+float gao_pin_palus = 0;
+u16 vpp;
+int flag = 0;
+int inter = 0;
+int flag_mode = 0;
+int gain = 1;
+u8 C_dc_ac = 0;
+u8 change_gain = 0;
+
+
+
+float arr_plot[250];
+u8 pause = 0;
+int ver = 0;
+int hor = 0;
+u16 vcc_div = 1000;
+
+
 u8 arr_F[13][8] = {"  5us\0"," 10us\0"," 20us\0"," 50us\0","100us\0","200us\0","500us\0","  1ms\0","  2ms\0","  5ms\0"," 10ms\0"," 20ms\0"," 50ms\0"};
 u8 arr_V[7][8] = {"100mV\0","200mV\0","500mV\0","   1V\0","   2V\0","   5V\0","  10V\0"};
 u8 arr_gain[8][6] = {"0 0 0\0","0 0 1\0","0 1 0\0","0 1 1\0","1 0 0\0","1 0 1\0","1 1 0\0","1 1 1\0"};
-u8 arr_C[2][10] = {" AC\0", " DC\0"};
+u8 arr_C[2][10] = {"AC\0", "DC\0"};
 u8 arr_move[2][9] ={"mov_hor\0","mov_ver\0"};
 u8 arr_JDQ[2][3] = {" 0\0"," 1\0"};
 float gain_num[8] = {0.05, 0.1, 0.2, 0.4, 8, 10, 20, 25};
@@ -17,6 +41,9 @@ float gain_multiple0[8] = {0.036,0.063,0.12,0.226,0.49,0.57,1.13,3};
 float gain_multiple1[8] = {0.264,0.54,1.05,2.2,4.2,5.2,9.85,24};
 u8 show_gain0[8][8] = {"0.025\0","0.05 \0","0.1  \0","0.2  \0","0.4  \0","0.5  \0","1    \0","2.5  \0"};
 u8 show_gain1[8][8] = {"0.25 \0","0.5  \0","1    \0","2    \0","4    \0","5    \0","10   \0","25   \0"};
+
+
+
 
 void set_background()
 {
@@ -39,13 +66,61 @@ void set_background()
 	LCD_DrawRectangle(255,42,316,78,BLUE);
 	LCD_DrawRectangle(255,82,316,101,BLUE);
 	LCD_DrawRectangle(255,105,316,124,BLUE);
+	LCD_DrawRectangle(255,128,283,147,BLUE);
+	LCD_DrawRectangle(288,128,316,147,BLUE);
+	LCD_DrawRectangle(255,151,316,170,BLUE);
 	LCD_DrawRectangle(255,2,316,38,WHITE);
 	POINT_COLOR=BLUE;
-	LCD_ShowString(257,3,200,16,16,"VOL/div",BLACK,POINT_COLOR);	
-	LCD_ShowString(257,43,200,16,16,"TIM/div",BLACK,POINT_COLOR);
-	LCD_ShowString(257,20,200,16,16,arr_F[5],BLACK,POINT_COLOR);	
-	LCD_ShowString(257,60,200,16,16,arr_V[3],BLACK,POINT_COLOR);
-	LCD_ShowString(257,85,200,16,16,arr_move[0],BLACK,POINT_COLOR);
-	LCD_ShowString(257,108,200,16,16,"load",BLACK,POINT_COLOR);
+	LCD_ShowString(258,3,200,16,16,"VOL/div",BLACK,POINT_COLOR);	
+	LCD_ShowString(258,43,200,16,16,"TIM/div",BLACK,POINT_COLOR);
+	LCD_ShowString(258,20,200,16,16,arr_F[5],BLACK,POINT_COLOR);	
+	LCD_ShowString(258,60,200,16,16,arr_V[3],BLACK,POINT_COLOR);
+	LCD_ShowString(258,84,200,16,16,arr_move[0],BLACK,POINT_COLOR);
+	LCD_ShowString(260,107,200,16,16," load",BLACK,POINT_COLOR);
+	LCD_ShowString(260,130,200,16,16,arr_C[0],BLACK,POINT_COLOR);
+	LCD_ShowString(290,130,200,16,16,arr_JDQ[0],BLACK,POINT_COLOR);
+	LCD_ShowString(265,153,200,16,16,arr_gain[0],BLACK,POINT_COLOR);
+	
+	LCD_DrawRectangle(257,174,281,195,BLUE);
+	LCD_DrawRectangle(290,174,314,195,BLUE);
+	LCD_ShowString(258,176,200,16,16," +",BLACK,POINT_COLOR);
+	LCD_ShowString(291,176,200,16,16," -",BLACK,POINT_COLOR);
 	
 }
+
+void draw_point(u16 a,u16 b,u16 color)
+{							    
+	LCD_Fast_DrawPoint(a,200-b,color);
+}
+
+void draw_line(u16 x1,u16 y1,u16 x2,u16 y2,u16 color)
+{
+	LCD_DrawLine(x1,200-y1,x2,200-y2,color);	
+}
+
+void Grid(void)
+{
+	u16 index_y = 0;
+	u16 index_hang = 0;	
+
+	POINT_COLOR = BLUE;		
+	for(index_hang = 0;index_hang< 250;index_hang = index_hang + 25)
+	{
+		for(index_y = 0;index_y<200;index_y = index_y +5)
+		{
+			draw_point(index_hang,index_y,POINT_COLOR);	
+		}
+	}	
+	for(index_hang = 0;index_hang<200;index_hang = index_hang + 25)
+	{
+		for(index_y = 0;index_y<250;index_y = index_y +5)
+		{
+			draw_point(index_y,index_hang,POINT_COLOR);	
+		}
+	}
+	POINT_COLOR = BLUE;
+	LCD_DrawRectangle(0,0,250,200,POINT_COLOR);
+	draw_line(0,100,250,100,POINT_COLOR);
+	draw_line(125,0,125,200,POINT_COLOR);
+}
+

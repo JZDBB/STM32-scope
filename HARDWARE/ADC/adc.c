@@ -4,6 +4,15 @@
 #define BUFFE (640)
 
 u16 ADC_BUFF[BUFFE];
+u16 index2 = 0;
+u16 index1 = 0;
+u8 flag_change = 0;
+u8 flag_50us = 0;
+int inter_b = 0;
+float multiple = 1;
+int mode_hard = 0;
+u32 max_data = 0;
+u32 min_data = 0;
 
 void  ADC_DMA_Init()
 {
@@ -72,9 +81,36 @@ void  ADC_DMA_Init()
 }
 
 
-void Get_Value(){
+void Get_Value()
+{
 	ADC_DMA_Init();
+	TIM_SetCounter(TIM3,0);	
+	TIM_SetAutoreload(TIM3, 200/50-1);
 	TIM_Cmd(TIM3, ENABLE);
 	while(DMA_GetFlagStatus(DMA2_Stream0,DMA_FLAG_TCIF0)==RESET);
 	TIM_Cmd(TIM3, DISABLE);
 }													   
+
+
+u16 ADC_Get_Vpp(void)	   
+{
+	u32 n=0;
+	float pp=0;
+	max_data=ADC_BUFF[0];
+	min_data=ADC_BUFF[0];
+	for(n = 1;n<320;n++)
+	{
+		if(ADC_BUFF[n]>max_data)
+		{
+			max_data = ADC_BUFF[n];
+		}
+		if(ADC_BUFF[n]<min_data)
+		{
+			min_data = ADC_BUFF[n];
+			index2 = n;
+		}			
+	} 	
+	pp = (float)(max_data-min_data);
+	pp = pp*(3300.0* multiple /4095);
+	return pp;	
+}

@@ -22,32 +22,38 @@ Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
 C:\Users\ynbb\Desktop\¼òÒ×Ê¾²¨Æ÷\USER\ADC.uvproj
-Project File Date:  09/01/2015
+Project File Date:  07/29/2017
 
 <h2>Output:</h2>
 Rebuild target 'ADC'
 compiling main.c...
-..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
+..\HARDWARE\ADC\adc.h(10): warning:  #1295-D: Deprecated declaration ADC_DMA_Init - give arg types
+  void  ADC_DMA_Init();
+..\HARDWARE\ADC\adc.h(11): warning:  #1295-D: Deprecated declaration Get_Value - give arg types
+  void Get_Value();
 background.h(16): warning:  #1295-D: Deprecated declaration set_background - give arg types
   void set_background();
 background.h(18): warning:  #1-D: last line of file ends without a newline
   #endif
-main.c(12): warning:  #177-D: variable "adcx" was declared but never referenced
+..\HARDWARE\TIMER\timer.h(5): warning:  #1295-D: Deprecated declaration TIM3_Init - give arg types
+  void TIM3_Init();
+main.c(46): warning:  #174-D: expression has no effect
+                for(i = 0;i++;i<200)
+main.c(17): warning:  #177-D: variable "adcx" was declared but never referenced
         u16 adcx;
-main.c(13): warning:  #177-D: variable "temp" was declared but never referenced
-        float temp;
-main.c(14): warning:  #550-D: variable "vpp_buf" was set but never used
+main.c(20): warning:  #550-D: variable "vpp_buf" was set but never used
         u8 vpp_buf[7];
-main.c(15): warning:  #550-D: variable "v_buf" was set but never used
+main.c(21): warning:  #550-D: variable "v_buf" was set but never used
         u8 v_buf[7];
-main.c(16): warning:  #550-D: variable "duty_buf" was set but never used
+main.c(22): warning:  #550-D: variable "duty_buf" was set but never used
         u8 duty_buf[8];
-main.c(17): warning:  #177-D: variable "vol" was declared but never referenced
+main.c(23): warning:  #177-D: variable "vol" was declared but never referenced
         u16 vol;
-main.c(18): warning:  #177-D: variable "duty" was declared but never referenced
+main.c(24): warning:  #177-D: variable "duty" was declared but never referenced
         u16 duty = 0;
-main.c: 10 warnings, 0 errors
+main.c: 13 warnings, 0 errors
 compiling stm32f4xx_it.c...
 stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -63,7 +69,11 @@ background.h(16): warning:  #1295-D: Deprecated declaration set_background - giv
   void set_background();
 background.h(18): warning:  #1-D: last line of file ends without a newline
   #endif
-background.c: 3 warnings, 0 errors
+..\HARDWARE\ADC\adc.h(10): warning:  #1295-D: Deprecated declaration ADC_DMA_Init - give arg types
+  void  ADC_DMA_Init();
+..\HARDWARE\ADC\adc.h(11): warning:  #1295-D: Deprecated declaration Get_Value - give arg types
+  void Get_Value();
+background.c: 5 warnings, 0 errors
 compiling led.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -75,13 +85,25 @@ compiling lcd.c...
 compiling adc.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
-..\HARDWARE\ADC\adc.c(76): warning:  #1-D: last line of file ends without a newline
-  } 
-..\HARDWARE\ADC\adc.c: 2 warnings, 0 errors
+..\HARDWARE\ADC\adc.h(10): warning:  #1295-D: Deprecated declaration ADC_DMA_Init - give arg types
+  void  ADC_DMA_Init();
+..\HARDWARE\ADC\adc.h(11): warning:  #1295-D: Deprecated declaration Get_Value - give arg types
+  void Get_Value();
+..\HARDWARE\ADC\adc.c: 3 warnings, 0 errors
 compiling key.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
 ..\HARDWARE\KEY\key.c: 1 warning, 0 errors
+compiling dma.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\HARDWARE\DMA\dma.c: 1 warning, 0 errors
+compiling timer.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\HARDWARE\TIMER\timer.h(5): warning:  #1295-D: Deprecated declaration TIM3_Init - give arg types
+  void TIM3_Init();
+..\HARDWARE\TIMER\timer.c: 2 warnings, 0 errors
 compiling delay.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -123,10 +145,22 @@ compiling stm32f4xx_syscfg.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
 ..\FWLIB\src\stm32f4xx_syscfg.c: 1 warning, 0 errors
+compiling stm32f4xx_dma.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\FWLIB\src\stm32f4xx_dma.c: 1 warning, 0 errors
+compiling stm32f4xx_exti.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\FWLIB\src\stm32f4xx_exti.c: 1 warning, 0 errors
+compiling stm32f4xx_tim.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\FWLIB\src\stm32f4xx_tim.c: 1 warning, 0 errors
 linking...
-Program Size: Code=27646 RO-data=6574 RW-data=588 ZI-data=1852  
+Program Size: Code=32446 RO-data=6574 RW-data=528 ZI-data=3128  
 FromELF: creating hex file...
-"..\OBJ\ADC.axf" - 0 Error(s), 30 Warning(s).
+"..\OBJ\ADC.axf" - 0 Error(s), 42 Warning(s).
 </pre>
 </body>
 </html>

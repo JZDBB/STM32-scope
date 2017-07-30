@@ -37,3 +37,9 @@
 ..\obj\timer.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\timer.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 ..\obj\timer.o: ..\HARDWARE\LED\led.h
+..\obj\timer.o: ..\HARDWARE\include\touch.h
+..\obj\timer.o: ..\HARDWARE\include\ott2001a.h
+..\obj\timer.o: ..\HARDWARE\include\gt9147.h
+..\obj\timer.o: ..\USER\background.h
+..\obj\timer.o: ..\HARDWARE\LCD\lcd.h
+..\obj\timer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

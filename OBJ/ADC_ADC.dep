@@ -1,5 +1,5 @@
 Dependencies for Project 'ADC', Target 'ADC': (DO NOT MODIFY !)
-F (.\main.c)(0x597DD7BD)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\FWLIB\inc -I..\HARDWARE\DMA -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\include-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x597DF678)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\FWLIB\inc -I..\HARDWARE\DMA -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\include-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (stm32f4xx.h)(0x542BA483)
 I (..\CORE\core_cm4.h)(0x53C7D530)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -44,8 +44,8 @@ I (..\HARDWARE\LCD\lcd.h)(0x597ADD93)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
 I (..\HARDWARE\ADC\adc.h)(0x597D7DA5)
 I (..\HARDWARE\DMA\dma.h)(0x597C5669)
-I (background.h)(0x597DCA2C)
-I (..\HARDWARE\TIMER\timer.h)(0x597C5669)
+I (background.h)(0x597DF1D4)
+I (..\HARDWARE\TIMER\timer.h)(0x597DE69D)
 I (..\HARDWARE\include\touch.h)(0x597D6EEA)
 I (..\HARDWARE\include\ott2001a.h)(0x597D6EEA)
 I (..\HARDWARE\include\gt9147.h)(0x597D6EEA)
@@ -122,8 +122,8 @@ I (..\FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
 I (..\FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
-F (.\background.c)(0x597DD880)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\FWLIB\inc -I..\HARDWARE\DMA -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\include-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX-o ..\obj\background.o --omf_browse ..\obj\background.crf --depend ..\obj\background.d)
-I (background.h)(0x597DCA2C)
+F (.\background.c)(0x597DF4E4)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\FWLIB\inc -I..\HARDWARE\DMA -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\include-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX-o ..\obj\background.o --omf_browse ..\obj\background.crf --depend ..\obj\background.d)
+I (background.h)(0x597DF1D4)
 I (..\SYSTEM\sys\sys.h)(0x55E51862)
 I (..\USER\stm32f4xx.h)(0x542BA483)
 I (..\CORE\core_cm4.h)(0x53C7D530)
@@ -359,8 +359,8 @@ I (..\FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
 I (..\SYSTEM\delay\delay.h)(0x55E51862)
-F (..\HARDWARE\TIMER\timer.c)(0x597C8BF1)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\FWLIB\inc -I..\HARDWARE\DMA -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\include-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX-o ..\obj\timer.o --omf_browse ..\obj\timer.crf --depend ..\obj\timer.d)
-I (..\HARDWARE\TIMER\timer.h)(0x597C5669)
+F (..\HARDWARE\TIMER\timer.c)(0x597DF66A)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\FWLIB\inc -I..\HARDWARE\DMA -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\include-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX-o ..\obj\timer.o --omf_browse ..\obj\timer.crf --depend ..\obj\timer.d)
+I (..\HARDWARE\TIMER\timer.h)(0x597DE69D)
 I (..\SYSTEM\sys\sys.h)(0x55E51862)
 I (..\USER\stm32f4xx.h)(0x542BA483)
 I (..\CORE\core_cm4.h)(0x53C7D530)
@@ -397,6 +397,12 @@ I (..\FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
 I (..\HARDWARE\LED\led.h)(0x55E3D140)
+I (..\HARDWARE\include\touch.h)(0x597D6EEA)
+I (..\HARDWARE\include\ott2001a.h)(0x597D6EEA)
+I (..\HARDWARE\include\gt9147.h)(0x597D6EEA)
+I (..\USER\background.h)(0x597DF1D4)
+I (..\HARDWARE\LCD\lcd.h)(0x597ADD93)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
 F (..\HARDWARE\src\24cxx.c)(0x597D6EEA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\FWLIB\inc -I..\HARDWARE\DMA -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\include-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX-o ..\obj\24cxx.o --omf_browse ..\obj\24cxx.crf --depend ..\obj\24cxx.d)
 I (..\HARDWARE\include\24cxx.h)(0x597D6EEA)
 I (..\HARDWARE\include\myiic.h)(0x597D6EEA)

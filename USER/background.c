@@ -7,27 +7,28 @@
 #include "adc.h"
 
 u8 frequency_flag = 0;
-long int shao_miao_shu_du = 0;
 u8 num_shao_miao = 5;
 u8 mode1 = 0;
 u8 mode2 = 0;
-u8 num_fu_du =3;
 float gao_pin_palus = 0;
 u16 vpp;
 int flag = 0;
 int inter = 0;
-int flag_mode = 0;
+
+
+int flag_move = 0;
 int gain = 1;
 u8 C_dc_ac = 0;
 u8 change_gain = 0;
-
-
-
 float arr_plot[250];
 u8 pause = 0;
 int ver = 0;
 int hor = 0;
 u16 vcc_div = 1000;
+int selected = 0;
+u8 magnitude_flag =3;
+long int scan_flag = 5;
+
 
 
 u8 arr_F[13][8] = {"  5us\0"," 10us\0"," 20us\0"," 50us\0","100us\0","200us\0","500us\0","  1ms\0","  2ms\0","  5ms\0"," 10ms\0"," 20ms\0"," 50ms\0"};
@@ -73,13 +74,13 @@ void set_background()
 	POINT_COLOR=BLUE;
 	LCD_ShowString(258,3,200,16,16,"VOL/div",BLACK,POINT_COLOR);	
 	LCD_ShowString(258,43,200,16,16,"TIM/div",BLACK,POINT_COLOR);
-	LCD_ShowString(258,20,200,16,16,arr_F[5],BLACK,POINT_COLOR);	
-	LCD_ShowString(258,60,200,16,16,arr_V[3],BLACK,POINT_COLOR);
-	LCD_ShowString(258,84,200,16,16,arr_move[0],BLACK,POINT_COLOR);
+	LCD_ShowString(258,20,200,16,16,arr_F[scan_flag-1],BLACK,POINT_COLOR);	
+	LCD_ShowString(258,60,200,16,16,arr_V[magnitude_flag-1],BLACK,POINT_COLOR);
+	LCD_ShowString(258,84,200,16,16,arr_move[flag_move],BLACK,POINT_COLOR);
 	LCD_ShowString(260,107,200,16,16," load",BLACK,POINT_COLOR);
-	LCD_ShowString(260,130,200,16,16,arr_C[0],BLACK,POINT_COLOR);
-	LCD_ShowString(290,130,200,16,16,arr_JDQ[0],BLACK,POINT_COLOR);
-	LCD_ShowString(265,153,200,16,16,arr_gain[0],BLACK,POINT_COLOR);
+	LCD_ShowString(260,130,200,16,16,arr_C[C_dc_ac],BLACK,POINT_COLOR);
+	LCD_ShowString(290,130,200,16,16,arr_JDQ[change_gain],BLACK,POINT_COLOR);
+	LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,POINT_COLOR);
 	
 	LCD_DrawRectangle(257,174,281,195,BLUE);
 	LCD_DrawRectangle(290,174,314,195,BLUE);
@@ -124,3 +125,14 @@ void Grid(void)
 	draw_line(125,0,125,200,POINT_COLOR);
 }
 
+void load_data()
+{
+	int i;
+	for(i = 0;i<640;i++)
+	{
+		USART_SendData(USART3, (u8)(ADC_BUFF[i]>>8));
+		while(USART_GetFlagStatus(USART3,USART_FLAG_TXE)==RESET);
+		USART_SendData(USART3, (u8)(ADC_BUFF[i]<<8>>8));
+		while(USART_GetFlagStatus(USART3,USART_FLAG_TXE)==RESET);
+	}
+}

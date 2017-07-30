@@ -46,6 +46,7 @@ int main(void)
 	ADC_DMA_Init();      //≥ı ºªØADC
 	TIM3_Init();
 	Touch_Init();
+	TIM2_Int_Init(1000-1,8400-1);
 	
 	set_background();
 	Get_Value();

@@ -33,11 +33,13 @@ stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_4
   void  ADC_DMA_Init();
 ..\HARDWARE\ADC\adc.h(20): warning:  #1295-D: Deprecated declaration Get_Value - give arg types
   void Get_Value();
-background.h(35): warning:  #1295-D: Deprecated declaration set_background - give arg types
+background.h(37): warning:  #1295-D: Deprecated declaration set_background - give arg types
   void set_background();
-background.h(40): warning:  #1-D: last line of file ends without a newline
+background.h(41): warning:  #1295-D: Deprecated declaration load_data - give arg types
+  void load_data();
+background.h(43): warning:  #1-D: last line of file ends without a newline
   #endif
-..\HARDWARE\TIMER\timer.h(5): warning:  #1295-D: Deprecated declaration TIM3_Init - give arg types
+..\HARDWARE\TIMER\timer.h(7): warning:  #1295-D: Deprecated declaration TIM3_Init - give arg types
   void TIM3_Init();
 main.c(48): warning:  #223-D: function "Touch_Init" declared implicitly
         Touch_Init();
@@ -51,7 +53,7 @@ main.c(34): warning:  #177-D: variable "duty_buf" was declared but never referen
         u8 duty_buf[8];
 main.c(36): warning:  #177-D: variable "duty" was declared but never referenced
         u16 duty = 0;
-main.c: 12 warnings, 0 errors
+main.c: 13 warnings, 0 errors
 compiling stm32f4xx_it.c...
 stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -63,15 +65,17 @@ system_stm32f4xx.c: 1 warning, 0 errors
 compiling background.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
-background.h(35): warning:  #1295-D: Deprecated declaration set_background - give arg types
+background.h(37): warning:  #1295-D: Deprecated declaration set_background - give arg types
   void set_background();
-background.h(40): warning:  #1-D: last line of file ends without a newline
+background.h(41): warning:  #1295-D: Deprecated declaration load_data - give arg types
+  void load_data();
+background.h(43): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\HARDWARE\ADC\adc.h(19): warning:  #1295-D: Deprecated declaration ADC_DMA_Init - give arg types
   void  ADC_DMA_Init();
 ..\HARDWARE\ADC\adc.h(20): warning:  #1295-D: Deprecated declaration Get_Value - give arg types
   void Get_Value();
-background.c: 5 warnings, 0 errors
+background.c: 6 warnings, 0 errors
 compiling led.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -103,9 +107,15 @@ compiling dma.c...
 compiling timer.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
-..\HARDWARE\TIMER\timer.h(5): warning:  #1295-D: Deprecated declaration TIM3_Init - give arg types
+..\HARDWARE\TIMER\timer.h(7): warning:  #1295-D: Deprecated declaration TIM3_Init - give arg types
   void TIM3_Init();
-..\HARDWARE\TIMER\timer.c: 2 warnings, 0 errors
+..\USER\background.h(37): warning:  #1295-D: Deprecated declaration set_background - give arg types
+  void set_background();
+..\USER\background.h(41): warning:  #1295-D: Deprecated declaration load_data - give arg types
+  void load_data();
+..\USER\background.h(43): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\HARDWARE\TIMER\timer.c: 5 warnings, 0 errors
 compiling 24cxx.c...
 ..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
     #define STM32F40_41xxx
@@ -186,9 +196,9 @@ compiling stm32f4xx_tim.c...
     #define STM32F40_41xxx
 ..\FWLIB\src\stm32f4xx_tim.c: 1 warning, 0 errors
 linking...
-Program Size: Code=45022 RO-data=6778 RW-data=680 ZI-data=4128  
+Program Size: Code=46478 RO-data=6778 RW-data=684 ZI-data=4132  
 FromELF: creating hex file...
-"..\OBJ\ADC.axf" - 0 Error(s), 50 Warning(s).
+"..\OBJ\ADC.axf" - 0 Error(s), 55 Warning(s).
 </pre>
 </body>
 </html>

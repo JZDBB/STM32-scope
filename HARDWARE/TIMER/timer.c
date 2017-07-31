@@ -39,7 +39,7 @@ void choose(u16 color)
 			}
 }
 
-void TIM3_Init(){
+void TIM3_Init(void){
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef  TIM_OCInitStructure;	 
   GPIO_InitTypeDef GPIO_InitStructure;

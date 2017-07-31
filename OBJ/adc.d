@@ -37,3 +37,4 @@
 ..\obj\adc.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\adc.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 ..\obj\adc.o: ..\SYSTEM\delay\delay.h
+..\obj\adc.o: ..\USER\background.h

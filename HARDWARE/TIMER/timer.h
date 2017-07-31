@@ -4,7 +4,7 @@
 #include "stm32f4xx.h"
 
 void choose(u16 color);
-void TIM3_Init();
+void TIM3_Init(void);
 void TIM2_Int_Init(u16 arr,u16 psc);
 
 #endif

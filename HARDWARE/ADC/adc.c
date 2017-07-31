@@ -1,5 +1,6 @@
 #include "adc.h"
-#include "delay.h"		 
+#include "delay.h"
+#include "background.h"
 
 #define BUFFE (640)
 
@@ -14,7 +15,7 @@ int mode_hard = 0;
 u32 max_data = 0;
 u32 min_data = 0;
 
-void  ADC_DMA_Init()
+void  ADC_DMA_Init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
@@ -81,11 +82,21 @@ void  ADC_DMA_Init()
 }
 
 
-void Get_Value()
+void Get_Value(void)
 {
 	ADC_DMA_Init();
 	TIM_SetCounter(TIM3,0);	
-	TIM_SetAutoreload(TIM3, 200/50-1);
+	
+	if(num_scan>3)
+	{	
+		TIM_PrescalerConfig(TIM1,41,TIM_PSCReloadMode_Immediate);
+		TIM_SetAutoreload(TIM1, (num_scan/25)*2-1); //设定扫描速度
+	}
+	else
+	{
+		TIM_PrescalerConfig(TIM1,41,TIM_PSCReloadMode_Immediate);
+		TIM_SetAutoreload(TIM1, 1); //设定扫描速度
+	}
 	TIM_Cmd(TIM3, ENABLE);
 	while(DMA_GetFlagStatus(DMA2_Stream0,DMA_FLAG_TCIF0)==RESET);
 	TIM_Cmd(TIM3, DISABLE);
@@ -110,6 +121,6 @@ u16 ADC_Get_Vpp(void)
 		}			
 	} 	
 	pp = (float)(max_data-min_data);
-	pp = pp*(3300.0* multiple /4095);
-	return pp;	
+	pp = (float)pp*(3300.0f* multiple /4095);
+	return pp;
 }

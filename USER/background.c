@@ -6,16 +6,6 @@
 #include "lcd.h"
 #include "adc.h"
 
-u8 frequency_flag = 0;
-u8 num_shao_miao = 5;
-u8 mode1 = 0;
-u8 mode2 = 0;
-float gao_pin_palus = 0;
-int flag = 0;
-int inter = 0;
-
-
-
 u16 vpp;
 int flag_move = 0;
 int gain = 1;
@@ -26,13 +16,15 @@ u8 pause = 0;
 int ver = 0;
 int hor = 0;
 u16 vcc_div = 1000;
+u16 num_scan = 5;
+float gao_pin_palus = 0;
 int selected = 0;
 u8 magnitude_flag =3;
 long int scan_flag = 5;
 int update = 0;
 
-
-
+u16 F[13] = {5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000};
+u16 V[7] = {100,200,500,1000,2000,5000,10000};
 u8 arr_F[13][8] = {"  5us\0"," 10us\0"," 20us\0"," 50us\0","100us\0","200us\0","500us\0","  1ms\0","  2ms\0","  5ms\0"," 10ms\0"," 20ms\0"," 50ms\0"};
 u8 arr_V[7][8] = {"100mV\0","200mV\0","500mV\0","   1V\0","   2V\0","   5V\0","  10V\0"};
 u8 arr_gain[8][6] = {"0 0 0\0","0 0 1\0","0 1 0\0","0 1 1\0","1 0 0\0","1 0 1\0","1 1 0\0","1 1 1\0"};
@@ -46,9 +38,7 @@ u8 show_gain0[8][8] = {"0.025\0","0.05 \0","0.1  \0","0.2  \0","0.4  \0","0.5  \
 u8 show_gain1[8][8] = {"0.25 \0","0.5  \0","1    \0","2    \0","4    \0","5    \0","10   \0","25   \0"};
 
 
-
-
-void set_background()
+void set_background(void)
 {
 	POINT_COLOR = BLUE;
 	
@@ -127,7 +117,7 @@ void Grid(void)
 	draw_line(125,0,125,200,POINT_COLOR);
 }
 
-void load_data()
+void load_data(void)
 {
 	int i;
 	for(i = 0;i<640;i++)

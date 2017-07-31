@@ -27,13 +27,7 @@ void clear()
 
 int main(void)
 { 
- 	u16 adcx;
-	int i;
-	u8 vpp_buf[7];
-	u8 v_buf[7];
-	u8 duty_buf[8];
 	u8 vol;
-	u16 duty = 0;
 	
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
@@ -54,7 +48,7 @@ int main(void)
 	
 	while(1)
 	{ 
-		i = 0;
+		vcc_div = V[magnitude_flag-1];
 		if(pause == 0)
 		{
 			for(j=index2;j<index2+250;j++)
@@ -87,6 +81,7 @@ int main(void)
 				LCD_ShowxNum(46,203,vol,6,16,0,BLACK,RED);
 				//LCD_ShowxNum(262,102,arr_freq,RED,BLACK);
 			}
+			num_scan = F[scan_flag-1];
 			Get_Value();
 			vpp = ADC_Get_Vpp();
 		}

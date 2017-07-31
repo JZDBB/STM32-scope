@@ -511,7 +511,8 @@ u8 TP_Init(void)
 	return 1; 									 
 }
 
-void Touch_Init(){
+void Touch_Init(void)
+{
 	GPIO_InitTypeDef  GPIO_InitStructure;	
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOC|RCC_AHB1Periph_GPIOF, ENABLE);//Ê¹ÄÜGPIOB,C,FÊ±ÖÓ
 

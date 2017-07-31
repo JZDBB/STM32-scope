@@ -81,7 +81,6 @@ int main(void)
 				LCD_ShowxNum(46,203,vol,6,16,0,BLACK,RED);
 				//LCD_ShowxNum(262,102,arr_freq,RED,BLACK);
 			}
-			num_scan = F[scan_flag-1];
 			Get_Value();
 			vpp = ADC_Get_Vpp();
 		}

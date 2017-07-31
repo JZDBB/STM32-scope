@@ -147,8 +147,9 @@ void TIM2_IRQHandler(void)
 					selected = 1;
 					choose(WHITE);
 				}
-				else if(tp_dev.y[0]>=82&&tp_dev.y[0]<=101)
+				else if(tp_dev.y[0]>=82&&tp_dev.y[0]<=101&&flag_mov ==0)
 				{
+					flag_mov = 1;
 					pause = 1;
 					choose(BLUE);
 					selected = 2;
@@ -164,8 +165,9 @@ void TIM2_IRQHandler(void)
 					}
 					LCD_ShowString(258,84,200,16,16,arr_move[flag_move],BLACK,BLUE);
 				}
-				else if(tp_dev.y[0]>=105&&tp_dev.y[0]<=124)
+				else if(tp_dev.y[0]>=105&&tp_dev.y[0]<=124&&flag_load ==0)
 				{
+					flag_load = 1;
 					pause = 0;
 					choose(BLUE);
 					selected = 3;
@@ -174,8 +176,9 @@ void TIM2_IRQHandler(void)
 				}
 				else if(tp_dev.y[0]>=128&&tp_dev.y[0]<=147)
 				{
-					if(tp_dev.x[0]>=255&&tp_dev.x[0]<=283)
+					if(tp_dev.x[0]>=255&&tp_dev.x[0]<=283&&flag_acdc ==0)
 					{
+						flag_acdc = 1;
 						pause = 0;
 						choose(BLUE);
 						selected = 4;
@@ -191,8 +194,9 @@ void TIM2_IRQHandler(void)
 						}
 						LCD_ShowString(260,130,200,16,16,arr_C[C_dc_ac],BLACK,BLUE);
 					}
-					else if(tp_dev.x[0]>=288&&tp_dev.x[0]<=316)
+					else if(tp_dev.x[0]>=288&&tp_dev.x[0]<=316&&flag_gain ==0)
 					{
+						flag_gain = 1;
 						pause = 0;
 						choose(BLUE);
 						selected = 5;
@@ -220,92 +224,128 @@ void TIM2_IRQHandler(void)
 			{
 				if(tp_dev.x[0]>=257&&tp_dev.x[0]<=281)
 				{
-					switch(selected)
+					if(flag_inc==0)
 					{
-						case 0:
-							scan_flag++;
-							if(scan_flag==14)
-							{
-								scan_flag = 1;
-							}
-							LCD_ShowString(258,20,200,16,16,arr_F[scan_flag-1],BLACK,BLUE);
-							break;
-						case 1:
-							magnitude_flag++;
-							if(magnitude_flag==8)
-							{
-								magnitude_flag = 1;
-							}
-							LCD_ShowString(258,60,200,16,16,arr_V[magnitude_flag-1],BLACK,BLUE);
-							break;
-						case 2:
-							if(flag_move ==0)
-							{
-								update = 1;
-								hor = hor + 5;
-							}
-							else
-							{
-								update = 1;
-								ver = ver + 5;
-							}
-							break;
-						case 6:
-							gain++;
-							if(gain == 9)
-							{
-								gain = 1;
-							}
-							LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
-							break;
-						default:
-							break;
+						n = 0;
+						flag_inc = 1;
+						switch(selected)
+						{
+							case 0:
+								scan_flag++;
+								if(scan_flag==14)
+								{
+									scan_flag = 1;
+								}
+								LCD_ShowString(258,20,200,16,16,arr_F[scan_flag-1],BLACK,BLUE);
+								break;
+							case 1:
+								magnitude_flag++;
+								if(magnitude_flag==8)
+								{
+									magnitude_flag = 1;
+								}
+								LCD_ShowString(258,60,200,16,16,arr_V[magnitude_flag-1],BLACK,BLUE);
+								break;
+							case 2:
+								if(flag_move ==0)
+								{
+									update = 1;
+									hor = hor + 5;
+								}
+								else
+								{
+									update = 1;
+									ver = ver + 5;
+								}
+								break;
+							case 6:
+								gain++;
+								if(gain == 9)
+								{
+									gain = 1;
+								}
+								LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
+								break;
+							default:
+								break;
+						}
+					}else
+					{
+						n++;
+					}
+					if(n ==5)
+					{
+						flag_inc = 0;
 					}
 				}
 				else if(tp_dev.x[0]>=290&&tp_dev.x[0]<=314)
 				{
-					switch(selected){
-						case 0:
-							scan_flag--;
-							if(scan_flag==0)
-							{
-								scan_flag = 13;
-							}
-							LCD_ShowString(258,20,200,16,16,arr_F[scan_flag-1],BLACK,BLUE);
-							break;
-						case 1:
-							magnitude_flag--;
-							if(magnitude_flag==0)
-							{
-								magnitude_flag = 7;
-							}
-							LCD_ShowString(258,60,200,16,16,arr_V[magnitude_flag-1],BLACK,BLUE);
-							break;
-						case 2:
-							if(flag_move ==0)
-							{
-								update = 1;
-								hor = hor - 5;
-							}
-							else
-							{
-								update = 1;
-								ver = ver - 5;
-							}
-							break;
-						case 6:
-							gain--;
-							if(gain == 0)
-							{
-								gain = 8;
-							}
-							LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
-							break;
-						default:
-							break;
+					if(flag_dec ==0)
+					{
+						n = 0;
+						flag_dec = 1;
+						switch(selected)
+						{
+							case 0:
+								scan_flag--;
+								if(scan_flag==0)
+								{
+									scan_flag = 13;
+								}
+								LCD_ShowString(258,20,200,16,16,arr_F[scan_flag-1],BLACK,BLUE);
+								break;
+							case 1:
+								magnitude_flag--;
+								if(magnitude_flag==0)
+								{
+									magnitude_flag = 7;
+								}
+								LCD_ShowString(258,60,200,16,16,arr_V[magnitude_flag-1],BLACK,BLUE);
+								break;
+							case 2:
+								if(flag_move ==0)
+								{
+									update = 1;
+									hor = hor - 5;
+								}
+								else
+								{
+									update = 1;
+									ver = ver - 5;
+								}
+								break;
+							case 6:
+								gain--;
+								if(gain == 0)
+								{
+									gain = 8;
+								}
+								LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
+								break;
+							default:
+								break;
+						}
+					}
+					else
+					{
+						n++;
+					}
+					if(n ==5)
+					{
+						flag_dec = 0;
 					}
 				}
 			}
+		}
+		else
+		{
+			n = 0;
+			flag_inc = 0;
+			flag_dec = 0;
+			flag_load = 0;
+			flag_mov = 0;
+			flag_acdc = 0;
+			flag_gain = 0;
 		}
 	}
 	TIM_ClearITPendingBit(TIM2,TIM_IT_Update);  //清除中断标志位

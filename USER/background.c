@@ -22,6 +22,13 @@ int selected = 0;
 u8 magnitude_flag =3;
 long int scan_flag = 5;
 int update = 0;
+int n = 0;
+int flag_inc = 0;
+int flag_dec = 0;
+int flag_load = 0;
+int flag_mov = 0;
+int flag_acdc = 0;
+int flag_gain = 0;
 
 u16 F[13] = {5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000};
 u16 V[7] = {100,200,500,1000,2000,5000,10000};

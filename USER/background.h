@@ -18,6 +18,13 @@ extern int selected;
 extern u8 magnitude_flag;
 extern long int scan_flag;
 extern int update;
+extern int n;
+extern int flag_inc;
+extern int flag_dec;
+extern int flag_load;
+extern int flag_mov;
+extern int flag_acdc;
+extern int flag_gain;
 
 extern u16 V[7];
 extern u16 F[13];

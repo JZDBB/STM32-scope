@@ -13,7 +13,8 @@
 u16 j = 0;
 float temp;
 float temp1;
-
+extern u8  TIM5CH1_CAPTURE_STA;	//输入捕获状态		    				
+extern u32	TIM5CH1_CAPTURE_VAL;	//输入捕获值(TIM2/TIM5是32位)
 
 void clear()
 {
@@ -41,6 +42,7 @@ int main(void)
 	TIM3_Init();
 	Touch_Init();
 	TIM2_Int_Init(1000-1,8400-1);
+	TIM5_CH1_Cap_Init(0XFFFFFFFF,84-1); //以1Mhz的频率计数
 	
 	set_background();
 	Get_Value();

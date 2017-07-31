@@ -2,7 +2,6 @@
 #define __BACKGROUND_H
 #include <sys.h> 
 
-extern u16 num_scan;
 extern float gao_pin_palus;
 extern u16 vcc_div;
 extern u16 vpp;

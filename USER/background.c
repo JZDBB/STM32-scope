@@ -16,7 +16,6 @@ u8 pause = 0;
 int ver = 0;
 int hor = 0;
 u16 vcc_div = 1000;
-u16 num_scan = 5;
 float gao_pin_palus = 0;
 int selected = 0;
 u8 magnitude_flag =3;

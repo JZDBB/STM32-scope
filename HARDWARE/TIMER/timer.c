@@ -170,8 +170,7 @@ void TIM2_IRQHandler(void)
 					choose(BLUE);
 					selected = 3;
 					choose(WHITE);
-					
-					//load_data();
+					load_data();
 				}
 				else if(tp_dev.y[0]>=128&&tp_dev.y[0]<=147)
 				{

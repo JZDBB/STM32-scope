@@ -122,9 +122,11 @@ void load_data(void)
 	int i;
 	for(i = 0;i<640;i++)
 	{
-		USART_SendData(USART3, (u8)(ADC_BUFF[i]>>8));
-		while(USART_GetFlagStatus(USART3,USART_FLAG_TXE)==RESET);
-		USART_SendData(USART3, (u8)(ADC_BUFF[i]<<8>>8));
-		while(USART_GetFlagStatus(USART3,USART_FLAG_TXE)==RESET);
+		USART1->DR = (u8)(ADC_BUFF[i]>>8);
+		while((USART1->SR&0X40)==0);
+		//while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+		USART1->DR = (u8)(ADC_BUFF[i]<<8>>8);
+		while((USART1->SR&0X40)==0);
+		//while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 	}
 }

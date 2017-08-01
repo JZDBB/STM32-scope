@@ -101,7 +101,7 @@ void Get_Value(void)
 }													   
 
 
-u16 ADC_Get_Vpp(void)	   
+float ADC_Get_Vpp(void)	   
 {
 	u32 n=0;
 	float pp=0;
@@ -119,6 +119,6 @@ u16 ADC_Get_Vpp(void)
 		}			
 	} 	
 	pp = (float)(max_data-min_data);
-	pp = (float)pp*(3300.0f* multiple /4095);
+	pp = (float)pp*(3.3f* multiple /4095);
 	return pp;
 }

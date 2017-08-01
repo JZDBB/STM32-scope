@@ -2847,3 +2847,40 @@ void LCD_ShowString(u16 x,u16 y,u16 width,u16 height,u8 size,u8 *p, u16 back_col
         p++;
     }  
 }
+
+u32 pow2(u16 base, u16 index)
+{
+	int i;
+	u32 result = 1;
+	for(i = 0;i<index;)
+	{
+		result = result*base;
+		i++;
+	}
+	return result;
+}
+
+void LCD_ShowfloatNum(u16 x,u16 y,float num,u8 len,u8 dot_loc,u8 size,u16 back_color, u16 color)
+{
+	u32 integer = 0;
+	u32 decimal = 0;
+	float conver = 0;
+	int i;
+
+	conver = num;
+	integer = (u32)num;
+	for(i = 0;i<len-dot_loc;)
+	{
+		conver = conver*10;
+		i++;
+	}
+	decimal = ((u32)conver)%pow2(10,(len-dot_loc));
+	LCD_ShowxNum(x,y,integer,dot_loc-1,size,128,back_color,color);
+	LCD_ShowString(x+8*(dot_loc-1),y,200,16,16,".",back_color,color);
+	LCD_ShowxNum(x+8*dot_loc,y,decimal,len-dot_loc,size,128,back_color,color);
+}
+
+
+
+
+

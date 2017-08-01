@@ -28,8 +28,7 @@ void clear()
 
 int main(void)
 { 
-	u8 vol;
-	
+	float vol;
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
 	delay_init(168);    //初始化延时函数
@@ -79,10 +78,13 @@ int main(void)
 				draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
 				Grid();
 				arr_plot[j-index2] = temp;
-				vol = ADC_BUFF[j] * 3300 *multiple/ 4095;
-				LCD_ShowxNum(46,203,vol,6,16,0,BLACK,RED);
-				//LCD_ShowxNum(262,102,arr_freq,RED,BLACK);
+				vol = ADC_BUFF[j] * 3.3f *multiple/ 4095;
+				LCD_ShowfloatNum(46,203,vol,6,3,16,BLACK,RED);
+				LCD_ShowxNum(222,203,frequency,8,16,128,BLACK,RED);
+				//LCD_ShowlongNum(222,203,frequency,8,16,BLACK,RED);
 			}
+			LCD_ShowfloatNum(62,220,vpp,6,3,16,BLACK,RED);
+			//LCD_ShowxNum(62,220,vpp,6,16,128,BLACK,RED);
 			Get_Value();
 			vpp = ADC_Get_Vpp();
 		}
@@ -122,3 +124,4 @@ int main(void)
 		}
 	}
 }
+

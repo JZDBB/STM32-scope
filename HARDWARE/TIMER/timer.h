@@ -4,6 +4,7 @@
 #include "stm32f4xx.h"
 
 extern long long count;
+extern u32 frequency;
 
 void choose(u16 color);
 void TIM3_Init(void);

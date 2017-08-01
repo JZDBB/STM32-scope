@@ -7,7 +7,7 @@
 #include "lcd.h"
 #include "adc.h"
 
-u16 vpp;
+float vpp;
 int flag_move = 0;
 int gain = 1;
 u8 C_dc_ac = 0;

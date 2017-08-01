@@ -4,7 +4,7 @@
 
 extern float gao_pin_palus;
 extern u16 vcc_div;
-extern u16 vpp;
+extern float vpp;
 extern int ver;
 extern int hor;
 extern float arr_plot[250];

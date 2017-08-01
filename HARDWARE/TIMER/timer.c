@@ -12,7 +12,7 @@
 //Ft=定时器工作频率,单位:Mhz
 //这里使用的是定时器3!
 long long count = 0;
-
+u32 frequency = 0;
 
 void choose(u16 color)
 {
@@ -195,6 +195,7 @@ void TIM2_IRQHandler(void)
 						{
 							C_dc_ac = 0;
 						}
+						c_acdc(C_dc_ac);
 						LCD_ShowString(260,130,200,16,16,arr_C[C_dc_ac],BLACK,BLUE);
 					}
 					else if(tp_dev.x[0]>=288&&tp_dev.x[0]<=316&&flag_gain ==0)
@@ -212,6 +213,7 @@ void TIM2_IRQHandler(void)
 						{
 							change_gain = 0;
 						}
+						c_gain(change_gain);
 						LCD_ShowString(290,130,200,16,16,arr_JDQ[change_gain],BLACK,BLUE);
 					}
 				}
@@ -267,6 +269,7 @@ void TIM2_IRQHandler(void)
 								{
 									gain = 1;
 								}
+								c_multiple(gain);
 								LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
 								break;
 							default:
@@ -323,6 +326,7 @@ void TIM2_IRQHandler(void)
 								{
 									gain = 8;
 								}
+								c_multiple(gain);
 								LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
 								break;
 							default:
@@ -394,11 +398,11 @@ void TIM5_CH1_Cap_Init(u32 arr,u16 psc)
   TIM5_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV4;	 //配置输入分频,不分频 
   TIM5_ICInitStructure.TIM_ICFilter = 0x00;//IC1F=0000 配置输入滤波器 不滤波
   TIM_ICInit(TIM5, &TIM5_ICInitStructure);
-		
+	
 	TIM_ITConfig(TIM5,TIM_IT_Update|TIM_IT_CC1,ENABLE);//允许更新中断 ,允许CC1IE捕获中断	
 	
   TIM_Cmd(TIM5,ENABLE ); 	//使能定时器5
- 
+
   NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=2;//抢占优先级3
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority =0;		//子优先级3
@@ -455,5 +459,4 @@ void TIM5_IRQHandler(void)
  	}
 	TIM_ClearITPendingBit(TIM5, TIM_IT_CC1|TIM_IT_Update); //清除中断标志位
 }
-
 

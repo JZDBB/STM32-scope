@@ -1,3 +1,4 @@
+
 #include "background.h"
 #include "sys.h"
 #include "delay.h"
@@ -56,8 +57,8 @@ void set_background(void)
 	LCD_DrawRectangle(0,202,320,240,RED);
 	LCD_ShowString(5,203,200,16,16,"V(V):",BLACK,POINT_COLOR);
 	LCD_ShowString(5,220,200,16,16,"Vpp(V):",BLACK,POINT_COLOR);
-	LCD_ShowString(160,203,200,16,16,"Freq(Hz):",BLACK,POINT_COLOR);
-	LCD_ShowString(160,220,200,16,16,"duty(%):",BLACK,POINT_COLOR);
+	LCD_ShowString(150,203,200,16,16,"Freq(Hz):",BLACK,POINT_COLOR);
+	LCD_ShowString(150,220,200,16,16,"duty(%):",BLACK,POINT_COLOR);
 
 	POINT_COLOR=WHITE;
 	LCD_DrawRectangle(252,0,320,200,WHITE);
@@ -136,3 +137,55 @@ void load_data(void)
 		//while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 	}
 }
+
+void c_gain(int flag)
+{
+	switch(flag)
+	{
+		case 0:
+			break;
+		case 1:
+			break;
+		default:
+			break;
+	}	
+}
+
+void c_acdc(int flag)
+{
+	switch(flag)
+	{
+		case 0:
+			break;
+		case 1:
+			break;
+		default:
+			break;
+	}	
+}
+
+void c_multiple(int flag)
+{
+	switch(flag)
+	{
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		default:
+			break;
+	}	
+}
+

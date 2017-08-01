@@ -43,4 +43,8 @@ void draw_point(u16 a,u16 b,u16 color);
 void draw_line(u16 x1,u16 y1,u16 x2,u16 y2,u16 color);
 void Grid(void);
 void load_data(void);
+void c_gain(int flag);
+void c_acdc(int flag);
+void c_multiple(int flag);
+
 #endif

@@ -43,3 +43,5 @@
 ..\obj\timer.o: ..\USER\background.h
 ..\obj\timer.o: ..\HARDWARE\LCD\lcd.h
 ..\obj\timer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\timer.o: ..\SYSTEM\usart\usart.h
+..\obj\timer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

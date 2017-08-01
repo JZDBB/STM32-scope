@@ -3,6 +3,7 @@
 #include "touch.h"
 #include "background.h"
 #include "lcd.h"
+#include "usart.h"
 
 //通用定时器3中断初始化
 //arr：自动重装值。

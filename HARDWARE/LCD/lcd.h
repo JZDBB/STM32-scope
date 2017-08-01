@@ -151,6 +151,7 @@ void LCD_ShowxNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode, u16 back_color, u1
 void LCD_ShowString(u16 x,u16 y,u16 width,u16 height,u8 size,u8 *p, u16 back_color, u16 color);		//显示一个字符串,12/16字体
 u32 pow2(u16 base, u16 index);
 void LCD_ShowfloatNum(u16 x,u16 y,float num,u8 len,u8 dot_loc,u8 size,u16 back_color, u16 color);
+void LCD_ShowlongNum(u16 x,u16 y,u32 num,u8 len,u8 size,u16 back_color, u16 color);
 
 void LCD_WriteReg(u16 LCD_Reg, u16 LCD_RegValue);
 u16 LCD_ReadReg(u16 LCD_Reg);

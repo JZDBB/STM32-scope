@@ -5,10 +5,12 @@
 
 extern long long count;
 extern u32 frequency;
+extern float TIM_ExtCntFreq;
 
 void choose(u16 color);
 void TIM3_Init(void);
-void TIM2_Int_Init(u16 arr,u16 psc);
+void TIM4_Int_Init(u16 arr,u16 psc);
 void TIM5_CH1_Cap_Init(u32 arr,u16 psc);
+void TIM_Cnt_Init(void);
 
 #endif

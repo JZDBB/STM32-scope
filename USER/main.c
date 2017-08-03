@@ -29,7 +29,6 @@ void clear()
 int main(void)
 { 
 	float vol;
-	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
 	delay_init(168);    //初始化延时函数
 	uart_init(115200);	//初始化串口波特率为115200
@@ -40,8 +39,10 @@ int main(void)
 	ADC_DMA_Init();      //初始化ADC
 	TIM3_Init();
 	Touch_Init();
-	TIM2_Int_Init(1000-1,8400-1);
-	TIM5_CH1_Cap_Init(0XFFFFFFFF,84-1); //以1Mhz的频率计数
+	delay_ms(500);
+	TIM4_Int_Init(1000-1,8400-1);
+	//TIM5_CH1_Cap_Init(0XFFFFFFFF,84-1); //以1Mhz的频率计数
+	TIM_Cnt_Init();
 	
 	set_background();
 	Get_Value();
@@ -80,8 +81,10 @@ int main(void)
 				arr_plot[j-index2] = temp;
 				vol = ADC_BUFF[j] * 3.3f *multiple/ 4095;
 				LCD_ShowfloatNum(46,203,vol,6,3,16,BLACK,RED);
-				//LCD_ShowxNum(222,203,frequency,8,16,128,BLACK,RED);
-				LCD_ShowlongNum(222,203,frequency,8,16,BLACK,RED);
+				
+				frequency = (u32)TIM_ExtCntFreq;
+				LCD_ShowxNum(222,203,frequency,8,16,128,BLACK,RED);
+				//LCD_ShowlongNum(222,203,frequency,8,16,BLACK,RED);
 			}
 			LCD_ShowfloatNum(62,220,vpp,6,3,16,BLACK,RED);
 			//LCD_ShowxNum(62,220,vpp,6,16,128,BLACK,RED);

@@ -1,6 +1,7 @@
 #include "adc.h"
 #include "delay.h"
 #include "background.h"
+#include "timer.h"
 
 #define BUFFE (640)
 
@@ -72,7 +73,7 @@ void  ADC_DMA_Init(void)
 	ADC_Init(ADC1, &ADC_InitStructure);//ADC???
 
 
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_5, 1, ADC_SampleTime_3Cycles );
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_5, 1, ADC_SampleTime_3Cycles);
 
 	ADC_DMARequestAfterLastTransferCmd(ADC1, ENABLE);
 	ADC_DMACmd(ADC1,ENABLE);
@@ -84,16 +85,19 @@ void  ADC_DMA_Init(void)
 
 void Get_Value(void)
 {
+	float high_freq_period = 0;
 	ADC_DMA_Init();
 	TIM_SetCounter(TIM3,0);	
-	TIM_PrescalerConfig(TIM3,83,TIM_PSCReloadMode_Immediate);
 	if(scan_flag>3)
 	{	
+		TIM_PrescalerConfig(TIM3,41,TIM_PSCReloadMode_Immediate);
 		TIM_SetAutoreload(TIM3, (F[scan_flag-1]/25)*2-1); //设定扫描速度
 	}
 	else
 	{
-		TIM_SetAutoreload(TIM3, 1); //设定扫描速度
+		TIM_PrescalerConfig(TIM3,0,TIM_PSCReloadMode_Immediate);
+		high_freq_period = 50000.0f/frequency + F[scan_flag-1]-1;
+		TIM_SetAutoreload(TIM3, high_freq_period); //设定扫描速度
 	}
 	TIM_Cmd(TIM3, ENABLE);
 	while(DMA_GetFlagStatus(DMA2_Stream0,DMA_FLAG_TCIF0)==RESET);

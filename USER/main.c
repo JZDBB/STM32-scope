@@ -75,9 +75,9 @@ int main(void)
 				}
 				draw_point(j-index2,arr_plot[j-index2],BLACK);
 				draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);
+				Grid();
 				draw_point(j-index2,temp,YELLOW);				
 				draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
-				Grid();
 				arr_plot[j-index2] = temp;
 				vol = ADC_BUFF[j] * 3.3f *multiple/ 4095;
 				LCD_ShowfloatNum(46,203,vol,6,3,16,BLACK,RED);
@@ -96,6 +96,7 @@ int main(void)
 			if(update)
 			{
 				clear();
+				Grid();
 				for(j=index2+hor;j<index2+hor+250;j++)
 				{
 					temp = ADC_BUFF[j] * 3300 * multiple / 4096  *  25 /vcc_div + ver;
@@ -120,7 +121,6 @@ int main(void)
 					draw_line(j-index2-hor,temp,j-index2-hor+1,temp1,YELLOW);
 					arr_plot[j-index2-hor] = temp;
 				}
-				Grid();
 				delay_ms(100);
 				update = 0;
 			}

@@ -12,8 +12,7 @@
 //Ft=定时器工作频率,单位:Mhz
 //这里使用的是定时器3!
 long long count = 0;
-u32 frequency = 0;
-u32 cha  = 12345678;
+u32 frequency = 50000;
 float TIM_ExtCntFreq;
 
 void choose(u16 color)
@@ -498,7 +497,7 @@ void TIM7_IRQHandler(void)
 {
 	//char str[32];
 	TIM_ExtCntFreq=(TIM2->CNT-TIM7_LastCnt)*(1/0.2);// SAMPLE_PERIOD?????0.1s
-	TIM_ExtCntFreq/=2.142955;
+	TIM_ExtCntFreq/=2.142955f;
 	//sprintf(str,"%3.3f",TIM_ExtCntFreq/1000.0);//??????,????
 	TIM7_LastCnt=TIM2->CNT;
 	TIM_ClearITPendingBit(TIM7,TIM_IT_Update);

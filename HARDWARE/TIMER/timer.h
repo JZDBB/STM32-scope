@@ -6,6 +6,7 @@
 extern long long count;
 extern u32 frequency;
 extern float TIM_ExtCntFreq;
+extern  u32 cha;
 
 void choose(u16 color);
 void TIM3_Init(void);

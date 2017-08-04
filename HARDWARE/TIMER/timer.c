@@ -13,6 +13,7 @@
 //这里使用的是定时器3!
 long long count = 0;
 u32 frequency = 0;
+u32 cha  = 12345678;
 float TIM_ExtCntFreq;
 
 void choose(u16 color)

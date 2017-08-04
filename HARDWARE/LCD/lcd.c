@@ -2883,12 +2883,12 @@ void LCD_ShowfloatNum(u16 x,u16 y,float num,u8 len,u8 dot_loc,u8 size,u16 back_c
 void LCD_ShowlongNum(u16 x,u16 y,u32 num,u8 len,u8 size,u16 back_color, u16 color)
 {
 	int i;
-	u16 conver = 0;
+	u32 conver = 0;
 	u8 loc = 0;
 	loc = len/3;
 	for(i = 1;i<=loc;i++)
 	{
-		conver = (u16)num%1000;
+		conver = (u32)num%1000;
 		num = num/1000;
 		LCD_ShowxNum(x+8*(len-3*i)+(loc-i+1)*8,y,conver,3,size,128,back_color,color);
 		LCD_ShowString(x+8*(len-3*i)+(loc-i)*8,y,200,16,16,",",back_color,color);

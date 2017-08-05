@@ -10,6 +10,15 @@
 #include "timer.h"
 #include "touch.h"
 
+/*******************************************************************/
+//PC0 PC1 PC2 -- A B C
+//PC7 gain  
+//PC8 AC\DC
+//PA5 signal-input
+//PB3 square-signal for frequency
+/*******************************************************************/
+
+
 u16 j = 0;
 float temp;
 float temp1;

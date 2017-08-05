@@ -26,8 +26,8 @@ extern int flag_acdc;
 extern int flag_gain;
 
 extern u16 V[7];
-extern u16 F[13];
-extern u8 arr_F[13][8];
+extern float F[21];
+extern u8 arr_F[21][8];
 extern u8 arr_V[7][8];
 extern u8 arr_gain[8][6];
 extern u8 arr_JDQ[2][3];

@@ -223,7 +223,7 @@ void TIM4_IRQHandler(void)
 						{
 							case 0:
 								scan_flag++;
-								if(scan_flag==14)
+								if(scan_flag==22)
 								{
 									scan_flag = 1;
 								}
@@ -282,7 +282,7 @@ void TIM4_IRQHandler(void)
 								scan_flag--;
 								if(scan_flag==0)
 								{
-									scan_flag = 13;
+									scan_flag = 21;
 								}
 								LCD_ShowString(258,20,200,16,16,arr_F[scan_flag-1],BLACK,BLUE);
 								break;

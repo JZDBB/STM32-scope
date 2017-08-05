@@ -87,7 +87,7 @@ void Get_Value(void)
 {
 	ADC_DMA_Init();
 	TIM_SetCounter(TIM3,0);	
-	if(scan_flag>3)
+	if(scan_flag>11)
 	{	
 		TIM_PrescalerConfig(TIM3,41,TIM_PSCReloadMode_Immediate);
 		TIM_SetAutoreload(TIM3, (F[scan_flag-1]/25)*2-1); //设定扫描速度

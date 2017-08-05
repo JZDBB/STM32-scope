@@ -26,9 +26,29 @@ void clear()
 	}
 }
 
+void draw()
+{
+	int k;
+	for(k = 0;k<250;k++)
+	{
+		draw_point(k,arr_plot[k],YELLOW);
+		draw_line(k,arr_plot[k],k+1,arr_plot[k+1],YELLOW);
+	}
+}
+
+void mean()
+{
+	int k;
+	for(k = 2;k<248;k++)
+	{
+		arr_plot[k] =  (arr_plot[k-2]+arr_plot[k-1]+arr_plot[k]+arr_plot[k+1]+arr_plot[k+2])/5;
+	}
+}
+
 int main(void)
 { 
 	float vol;
+	float a[5] = {0,0,0,0,0};
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
 	delay_init(168);    //初始化延时函数
 	uart_init(115200);	//初始化串口波特率为115200
@@ -78,11 +98,13 @@ int main(void)
 						temp1=0;	
 					}
 					/*draw_point(j-index2,arr_plot[j-index2],BLACK);
-					draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);*/
+					draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);
 					draw_point(j-index2,temp,YELLOW);				
-					draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
+					draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);*/
 					arr_plot[j-index2] = temp;
 				}
+				mean();
+				draw();
 			}
 			else
 			{
@@ -156,11 +178,13 @@ int main(void)
 							temp1=0;	
 						}
 						/*draw_point(j-index2,arr_plot[j-index2],BLACK);
-						draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);*/
+						draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);
 						draw_point(j-index2,temp,YELLOW);				
-						draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
-						arr_plot[j-index2] = temp;
+						draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);*/
+						arr_plot[j-index2-hor] = temp;
 					}
+					mean();
+					draw();
 				}
 				else
 				{
@@ -190,9 +214,9 @@ int main(void)
 						draw_line(j-index2-hor,temp,j-index2-hor+1,temp1,YELLOW);
 						arr_plot[j-index2-hor] = temp;
 					}
-					delay_ms(100);
-					update = 0;
 				}
+				delay_ms(100);
+				update = 0;
 			}	
 		}
 	}

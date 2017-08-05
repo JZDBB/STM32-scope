@@ -255,7 +255,7 @@ void TIM4_IRQHandler(void)
 								{
 									gain = 1;
 								}
-								c_multiple(gain);
+								c_gain(change_gain);
 								LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
 								break;
 							default:
@@ -312,7 +312,7 @@ void TIM4_IRQHandler(void)
 								{
 									gain = 8;
 								}
-								c_multiple(gain);
+								c_gain(change_gain);
 								LCD_ShowString(265,153,200,16,16,arr_gain[gain-1],BLACK,BLUE);
 								break;
 							default:
@@ -343,8 +343,6 @@ void TIM4_IRQHandler(void)
 	}
 	TIM_ClearITPendingBit(TIM4,TIM_IT_Update);  //清除中断标志位
 }
-
-
 
 //定时器5通道1输入捕获配置
 //arr：自动重装值(TIM2,TIM5是32位的!!)

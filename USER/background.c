@@ -138,13 +138,90 @@ void load_data(void)
 	}
 }
 
+void set_io1(void)					  										
+{
+	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_SetBits(GPIOC,GPIO_Pin_1);
+	GPIO_SetBits(GPIOC,GPIO_Pin_0);
+}
+void set_io2(void)					  										
+{
+	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_SetBits(GPIOC,GPIO_Pin_1);
+	GPIO_ResetBits(GPIOC,GPIO_Pin_0);
+}
+void set_io3(void)					  										
+{
+	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_ResetBits(GPIOC,GPIO_Pin_1);
+	GPIO_SetBits(GPIOC,GPIO_Pin_0);
+}
+void set_io4(void)					  										
+{
+	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_ResetBits(GPIOC,GPIO_Pin_1);
+	GPIO_ResetBits(GPIOC,GPIO_Pin_0);
+}
+void set_io5(void)					  										
+{
+	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_SetBits(GPIOC,GPIO_Pin_1);
+	GPIO_SetBits(GPIOC,GPIO_Pin_0);
+}
+void set_io6(void)					  										
+{
+	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_SetBits(GPIOC,GPIO_Pin_1);
+	GPIO_ResetBits(GPIOC,GPIO_Pin_0);
+}
+void set_io7(void)					  										
+{
+	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_ResetBits(GPIOC,GPIO_Pin_1);
+	GPIO_SetBits(GPIOC,GPIO_Pin_0);
+}
+void set_io8(void)					  										
+{
+	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_ResetBits(GPIOC,GPIO_Pin_1);
+	GPIO_ResetBits(GPIOC,GPIO_Pin_0);
+}
+
 void c_gain(int flag)
 {
 	switch(flag)
 	{
 		case 0:
+			GPIO_SetBits(GPIOC,GPIO_Pin_7);
+			switch(gain)
+				{	
+					case 1:set_io1();break;
+					case 2:set_io2();break;
+					case 3:set_io3();break;
+					case 4:set_io4();break;
+					case 5:set_io5();break;
+					case 6:set_io6();break;
+					case 7:set_io7();break;
+					case 8:set_io8();break;
+					default :break;
+				}
+				multiple =1/(gain_multiple0[gain-1]);
 			break;
 		case 1:
+			GPIO_ResetBits(GPIOC,GPIO_Pin_7);
+			switch(gain)
+			{	
+				case 1:set_io1();break;
+				case 2:set_io2();break;
+				case 3:set_io3();break;
+				case 4:set_io4();break;
+				case 5:set_io5();break;
+				case 6:set_io6();break;
+				case 7:set_io7();break;
+				case 8:set_io8();break;
+				default :break;
+			}
+			multiple =1/(gain_multiple1[gain-1]);
 			break;
 		default:
 			break;
@@ -156,8 +233,10 @@ void c_acdc(int flag)
 	switch(flag)
 	{
 		case 0:
+			GPIO_SetBits(GPIOC,GPIO_Pin_8);
 			break;
 		case 1:
+			GPIO_ResetBits(GPIOC,GPIO_Pin_8);
 			break;
 		default:
 			break;

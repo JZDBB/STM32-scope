@@ -48,7 +48,6 @@ void mean()
 int main(void)
 { 
 	float vol;
-	float a[5] = {0,0,0,0,0};
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
 	delay_init(168);    //初始化延时函数
 	uart_init(115200);	//初始化串口波特率为115200

@@ -53,43 +53,79 @@ int main(void)
 		vcc_div = V[magnitude_flag-1];
 		if(pause == 0)
 		{
-			for(j=index2;j<index2+250;j++)
+			if(scan_flag < 4)
 			{
-				temp = ADC_BUFF[j] * 3300 * multiple / 4096  *  25 /vcc_div;
-				temp1 = ADC_BUFF[j + 1] * 3300* multiple / 4096 * 25 / vcc_div;
-				if(temp>200)
-				{
-					temp=200;
-				}
-				if(temp<0)
-				{
-					temp=0;	
-				}
-				if(temp1>200)
-				{
-					temp1=200;	
-				}
-				if(temp1<0)
-				{
-					temp1=0;	
-				}
-				draw_point(j-index2,arr_plot[j-index2],BLACK);
-				draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);
+				clear();
 				Grid();
-				draw_point(j-index2,temp,YELLOW);				
-				draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
-				arr_plot[j-index2] = temp;
-				vol = ADC_BUFF[j] * 3.3f *multiple/ 4095;
-				LCD_ShowfloatNum(46,203,vol,6,3,16,BLACK,RED);
-				
-				frequency = (u32)TIM_ExtCntFreq;
-				//LCD_ShowxNum(222,203,frequency,8,16,128,BLACK,RED);
-				LCD_ShowlongNum(222,203,frequency,8,16,BLACK,RED);
+				for(j=index2;j<index2+250;j++)
+				{
+					temp = getvalue(j-index2,det);
+					temp1 = getvalue(j-index2+1,det);
+					if(temp>200)
+					{
+						temp=200;
+					}
+					if(temp<0)
+					{
+						temp=0;	
+					}
+					if(temp1>200)
+					{
+						temp1=200;	
+					}
+					if(temp1<0)
+					{
+						temp1=0;	
+					}
+					/*draw_point(j-index2,arr_plot[j-index2],BLACK);
+					draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);*/
+					draw_point(j-index2,temp,YELLOW);				
+					draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
+					arr_plot[j-index2] = temp;
+				}
 			}
+			else
+			{
+				clear();
+				Grid();
+				for(j=index2;j<index2+250;j++)
+				{
+					temp = ADC_BUFF[j] * 3300 * multiple / 4096  *  25 /vcc_div;
+					temp1 = ADC_BUFF[j + 1] * 3300* multiple / 4096 * 25 / vcc_div;
+					if(temp>200)
+					{
+						temp=200;
+					}
+					if(temp<0)
+					{
+						temp=0;	
+					}
+					if(temp1>200)
+					{
+						temp1=200;	
+					}
+					if(temp1<0)
+					{
+						temp1=0;	
+					}
+					/*draw_point(j-index2,arr_plot[j-index2],BLACK);
+					draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);
+					*/
+					draw_point(j-index2,temp,YELLOW);				
+					draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
+					arr_plot[j-index2] = temp;
+				}
+			}
+			vol = ADC_BUFF[j] * 3.3f *multiple/ 4095;
+			LCD_ShowfloatNum(46,203,vol,6,3,16,BLACK,RED);
+			frequency = 100000;//(u32)TIM_ExtCntFreq;
+			//LCD_ShowxNum(222,203,frequency,8,16,128,BLACK,RED);
+			LCD_ShowlongNum(222,203,frequency,8,16,BLACK,RED);
 			LCD_ShowfloatNum(62,220,vpp,6,3,16,BLACK,RED);
 			//LCD_ShowxNum(62,220,vpp,6,16,128,BLACK,RED);
 			Get_Value();
 			vpp = ADC_Get_Vpp();
+			delay_ms(500);
 		}
 		else
 		{

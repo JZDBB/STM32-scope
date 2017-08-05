@@ -8,13 +8,13 @@
 u16 ADC_BUFF[BUFFE];
 u16 index2 = 160;
 u16 index1 = 0;
-u8 flag_change = 0;
-u8 flag_50us = 0;
-int inter_b = 0;
 float multiple = 1;
 int mode_hard = 0;
 u32 max_data = 0;
 u32 min_data = 0;
+float det = 0;
+float freq = 0;
+float high_freq_period = 200;
 
 void  ADC_DMA_Init(void)
 {
@@ -85,7 +85,6 @@ void  ADC_DMA_Init(void)
 
 void Get_Value(void)
 {
-	float high_freq_period = 0;
 	ADC_DMA_Init();
 	TIM_SetCounter(TIM3,0);	
 	if(scan_flag>3)
@@ -93,17 +92,34 @@ void Get_Value(void)
 		TIM_PrescalerConfig(TIM3,41,TIM_PSCReloadMode_Immediate);
 		TIM_SetAutoreload(TIM3, (F[scan_flag-1]/25)*2-1); //设定扫描速度
 	}
+	/*else if(scan_flag ==3)
+	{
+		TIM_PrescalerConfig(TIM3,0,TIM_PSCReloadMode_Immediate);
+		TIM_SetAutoreload(TIM3, 25); //设定扫描速度
+	}*/
 	else
 	{
 		TIM_PrescalerConfig(TIM3,0,TIM_PSCReloadMode_Immediate);
-		high_freq_period = 50000.0f/frequency + F[scan_flag-1]-1;
-		TIM_SetAutoreload(TIM3, high_freq_period); //设定扫描速度
+		high_freq_period = 200;
+		det = 0;
+		freq = frequency;
+		freq /= 1000000;
+		while(det*freq>0.05f||det*freq<0.03f)
+		{
+			high_freq_period++;
+			det = high_freq_period/84.0f;
+			while(det>0)
+			{
+				det -=1.0f/freq;
+			}
+			det += 1.0f/freq;
+		}
+		TIM_SetAutoreload(TIM3, high_freq_period-1); //设定扫描速度
 	}
 	TIM_Cmd(TIM3, ENABLE);
 	while(DMA_GetFlagStatus(DMA2_Stream0,DMA_FLAG_TCIF0)==RESET);
 	TIM_Cmd(TIM3, DISABLE);
-}													   
-
+}
 
 float ADC_Get_Vpp(void)	   
 {
@@ -120,9 +136,28 @@ float ADC_Get_Vpp(void)
 		if(ADC_BUFF[n]<min_data)
 		{
 			min_data = ADC_BUFF[n];
-		}			
+			index2 = n;
+		}
 	} 	
 	pp = (float)(max_data-min_data);
 	pp = (float)pp*(3.3f* multiple /4095);
 	return pp;
 }
+
+float getvalue(u16 index, float det_T)
+{
+	float index0;
+	int i;
+	float value = 0;
+	float value1 = 0;
+	float value2 = 0;
+	index0 = index;
+	index0 = (float)index0*F[scan_flag-1]/25/det_T;
+	i = (int)index0;
+	value1 = ADC_BUFF[i] * 3300 * multiple / 4096  *  25 /vcc_div;
+	value2 = ADC_BUFF[i + 1] * 3300* multiple / 4096 * 25 / vcc_div;
+	value = (float)(index0-(int)index0)*value1+(1-(index0-(int)index0))*value2;
+	return value;
+}
+
+

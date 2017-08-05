@@ -8,17 +8,17 @@
 extern u16 ADC_BUFF[BUFFE];
 extern u16 index2;
 extern u16 index1;
-extern u8 flag_change;
-extern u8 flag_50us;
-extern int inter_b;
 extern float multiple;
 extern int mode_hard;
 extern u32 max_data;
 extern u32 min_data;
+extern float det;
+extern float high_freq_period;
  							   
 void  ADC_DMA_Init(void);
 void Get_Value(void);
 float ADC_Get_Vpp(void);
+float getvalue(u16 index, float det_T);
 
 #endif 
 

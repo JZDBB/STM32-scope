@@ -1,4 +1,3 @@
-
 #include "background.h"
 #include "sys.h"
 #include "delay.h"
@@ -89,7 +88,7 @@ void set_background(void)
 }
 
 void draw_point(u16 a,u16 b,u16 color)
-{							    
+{
 	LCD_Fast_DrawPoint(a,200-b,color);
 }
 
@@ -110,12 +109,12 @@ void Grid(void)
 		{
 			draw_point(index_hang,index_y,POINT_COLOR);	
 		}
-	}	
+	}
 	for(index_hang = 0;index_hang<200;index_hang = index_hang + 25)
 	{
 		for(index_y = 0;index_y<250;index_y = index_y +5)
 		{
-			draw_point(index_y,index_hang,POINT_COLOR);	
+			draw_point(index_y,index_hang,POINT_COLOR);
 		}
 	}
 	POINT_COLOR = BLUE;
@@ -131,20 +130,18 @@ void load_data(void)
 	{
 		USART1->DR = (u8)(ADC_BUFF[i]>>8);
 		while((USART1->SR&0X40)==0);
-		//while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 		USART1->DR = (u8)(ADC_BUFF[i]<<8>>8);
 		while((USART1->SR&0X40)==0);
-		//while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 	}
 }
 
-void set_io1(void)					  										
+void set_io1(void)
 {
 	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
 	GPIO_SetBits(GPIOC,GPIO_Pin_1);
 	GPIO_SetBits(GPIOC,GPIO_Pin_0);
 }
-void set_io2(void)					  										
+void set_io2(void)
 {
 	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
 	GPIO_SetBits(GPIOC,GPIO_Pin_1);
@@ -152,35 +149,35 @@ void set_io2(void)
 }
 void set_io3(void)					  										
 {
-	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
+	GPIO_SetBits(GPIOC,GPIO_Pin_2);
 	GPIO_ResetBits(GPIOC,GPIO_Pin_1);
 	GPIO_SetBits(GPIOC,GPIO_Pin_0);
 }
-void set_io4(void)					  										
+void set_io4(void)
 {
 	GPIO_SetBits(GPIOC,GPIO_Pin_2);	
 	GPIO_ResetBits(GPIOC,GPIO_Pin_1);
 	GPIO_ResetBits(GPIOC,GPIO_Pin_0);
 }
-void set_io5(void)					  										
+void set_io5(void)
 {
 	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
 	GPIO_SetBits(GPIOC,GPIO_Pin_1);
 	GPIO_SetBits(GPIOC,GPIO_Pin_0);
 }
-void set_io6(void)					  										
+void set_io6(void)
 {
 	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
 	GPIO_SetBits(GPIOC,GPIO_Pin_1);
 	GPIO_ResetBits(GPIOC,GPIO_Pin_0);
 }
-void set_io7(void)					  										
+void set_io7(void)
 {
 	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
 	GPIO_ResetBits(GPIOC,GPIO_Pin_1);
 	GPIO_SetBits(GPIOC,GPIO_Pin_0);
 }
-void set_io8(void)					  										
+void set_io8(void)
 {
 	GPIO_ResetBits(GPIOC,GPIO_Pin_2);	
 	GPIO_ResetBits(GPIOC,GPIO_Pin_1);

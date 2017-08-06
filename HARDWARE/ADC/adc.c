@@ -3,7 +3,7 @@
 #include "background.h"
 #include "timer.h"
 
-#define BUFFE (640)
+#define BUFFE (6000)
 
 u16 ADC_BUFF[BUFFE];
 u16 index2 = 160;
@@ -92,11 +92,6 @@ void Get_Value(void)
 		TIM_PrescalerConfig(TIM3,41,TIM_PSCReloadMode_Immediate);
 		TIM_SetAutoreload(TIM3, (F[scan_flag-1]/25)*2-1); //设定扫描速度
 	}
-	/*else if(scan_flag ==3)
-	{
-		TIM_PrescalerConfig(TIM3,0,TIM_PSCReloadMode_Immediate);
-		TIM_SetAutoreload(TIM3, 25); //设定扫描速度
-	}*/
 	else
 	{
 		TIM_PrescalerConfig(TIM3,0,TIM_PSCReloadMode_Immediate);

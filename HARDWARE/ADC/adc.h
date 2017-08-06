@@ -3,7 +3,7 @@
 #include "sys.h" 
 #include "stm32f4xx.h"
 
-#define BUFFE (640)
+#define BUFFE (6000)
 
 extern u16 ADC_BUFF[BUFFE];
 extern u16 index2;

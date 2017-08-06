@@ -47,10 +47,43 @@ void draw()
 
 void mean()
 {
-	int k;
-	for(k = 2;k<248;k++)
+	float min0,max0,min1,max1,k,b;
+	int i;
+	min0 = arr_plot[0];
+	max0 = arr_plot[0];
+	for(i = 0;i<250;i++)
 	{
-		arr_plot[k] =  (arr_plot[k-2]+arr_plot[k-1]+arr_plot[k]+arr_plot[k+1]+arr_plot[k+2])/5;
+		if(min0>arr_plot[i])
+		{
+			min0 = arr_plot[i];
+		}
+		if(max0<arr_plot[i])
+		{
+			max0 = arr_plot[i];
+		}
+	}
+	for(i = 2;i<248;i++)
+	{
+		arr_plot[i] = (arr_plot[i-2]+arr_plot[i-1]+arr_plot[i]+arr_plot[i+1]+arr_plot[i+2])/5;
+	}
+	min1 = arr_plot[0];
+	max1 = arr_plot[0];
+	for(i = 0;i<250;i++)
+	{
+		if(min1>arr_plot[i])
+		{
+			min1 = arr_plot[i];
+		}
+		if(max1<arr_plot[i])
+		{
+			max1 = arr_plot[i];
+		}
+	}
+	k = (max1-min1)/(max0-min0);
+	b = (min1*max0-max1*min0)/(max0-min0);
+	for(i = 2;i<248;i++)
+	{
+		arr_plot[i] = k*arr_plot[i]+b;
 	}
 }
 
@@ -69,7 +102,6 @@ int main(void)
 	Touch_Init();
 	delay_ms(500);
 	TIM4_Int_Init(1000-1,8400-1);
-	//TIM5_CH1_Cap_Init(0XFFFFFFFF,84-1); //以1Mhz的频率计数
 	TIM_Cnt_Init();
 	
 	set_background();
@@ -138,9 +170,6 @@ int main(void)
 					{
 						temp1=0;	
 					}
-					/*draw_point(j-index2,arr_plot[j-index2],BLACK);
-					draw_line(j-index2,arr_plot[j-index2],j-index2+1,arr_plot[j-index2+1],BLACK);
-					*/
 					draw_point(j-index2,temp,YELLOW);				
 					draw_line(j-index2,temp,j-index2+1,temp1,YELLOW);
 					arr_plot[j-index2] = temp;
@@ -148,11 +177,9 @@ int main(void)
 			}
 			vol = ADC_BUFF[j] * 3.3f *multiple/ 4095;
 			LCD_ShowfloatNum(46,203,vol,6,3,16,BLACK,RED);
-			frequency = 5000000;//(u32)TIM_ExtCntFreq;
-			//LCD_ShowxNum(222,203,frequency,8,16,128,BLACK,RED);
+			frequency = 1000000;//(u32)TIM_ExtCntFreq;
 			LCD_ShowlongNum(222,203,frequency,8,16,BLACK,RED);
 			LCD_ShowfloatNum(62,220,vpp,6,3,16,BLACK,RED);
-			//LCD_ShowxNum(62,220,vpp,6,16,128,BLACK,RED);
 			Get_Value();
 			vpp = ADC_Get_Vpp();
 			delay_ms(500);

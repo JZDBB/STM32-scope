@@ -148,7 +148,7 @@ int main(void)
 			}
 			vol = ADC_BUFF[j] * 3.3f *multiple/ 4095;
 			LCD_ShowfloatNum(46,203,vol,6,3,16,BLACK,RED);
-			frequency = 2000000;//(u32)TIM_ExtCntFreq;
+			frequency = 5000000;//(u32)TIM_ExtCntFreq;
 			//LCD_ShowxNum(222,203,frequency,8,16,128,BLACK,RED);
 			LCD_ShowlongNum(222,203,frequency,8,16,BLACK,RED);
 			LCD_ShowfloatNum(62,220,vpp,6,3,16,BLACK,RED);
